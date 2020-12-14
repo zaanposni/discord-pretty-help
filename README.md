@@ -1,4 +1,4 @@
-![version](https://img.shields.io/pypi/v/discord-pretty-help) ![python](https://img.shields.io/badge/python-3.6+-blue)
+![version](https://img.shields.io/pypi/v/discord-pretty-help/1.1.2) ![python](https://img.shields.io/badge/python-3.6+-blue)
 
 # discord-pretty-help
 
