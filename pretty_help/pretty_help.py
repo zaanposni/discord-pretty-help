@@ -116,6 +116,32 @@ class Paginator:
             page_title (str): The title of the page
             commands (List[commands.Command]): The list of commands for the fields
         """
+        def get_command_signature(command):
+            """Retrieves the signature portion of the help page.
+
+            Parameters
+            ------------
+            command: :class:`Command`
+                The command to get the signature of.
+
+            Returns
+            --------
+            :class:`str`
+                The signature for the command.
+            """
+
+            parent = command.full_parent_name
+            if len(command.aliases) > 0:
+                aliases = '|'.join(command.aliases)
+                fmt = '[%s|%s]' % (command.name, aliases)
+                if parent:
+                    fmt = parent + ' ' + fmt
+                alias = fmt
+            else:
+                alias = command.name if not parent else parent + ' ' + command.name
+
+            return '%s %s' % (alias, command.signature)
+
         for command in commands:
             if not self._check_embed(
                 embed,
@@ -130,7 +156,7 @@ class Paginator:
 
             embed.add_field(
                 name=command.name,
-                value=f'{self.prefix}{command.short_doc or "No Description"}{self.suffix}',
+                value=f'{self.prefix}{get_command_signature(command) or "No Description"}{self.suffix}',
                 inline=False,
             )
         self._add_page(embed)
