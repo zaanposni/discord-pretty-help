@@ -155,8 +155,8 @@ class Paginator:
                 embed = self._new_page(page_title)
 
             embed.add_field(
-                name=command.name,
-                value=f'{self.prefix}{get_command_signature(command) or "No Description"}{self.suffix}',
+                name=get_command_signature(command),
+                value=f'{self.prefix}{command.short_doc or "No Description"}{self.suffix}',
                 inline=False,
             )
         self._add_page(embed)
